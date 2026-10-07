@@ -1,0 +1,225 @@
+<h1> *** ANOTAÇÕES DO NODE *** </h1>
+
+<h3> -- Introdução básica -- </h3>
+
+<p>
+    <b>NPM</b> - Gerenciador de pacotes do Node, que permite instalar bibliotecas e frameworks para o projeto. <br>
+    <b>JSON</b> - Formato de arquivo que armazena dados em formato de objeto, muito utilizado para configuração de projetos. <br>
+   Para escrever no .JSON, deve colocar as informações entre {} e usando "aspas duplas" <br>
+   E pode usar {} e [] dentro do objeto: 
+   <br>
+   <br>
+   <img src="/assets/img1.png" alt="pasta JSON"> 
+   <br>
+   <br>
+   Baixar a extensão <b>Thunder Client</b> <br>
+   Cuidado com os terminais abertos quando for rodar o servidor, pois se tiver outro terminal aberto com o mesmo servidor rodando, ele não vai funcionar. <br>
+   No arquivo <b>package.json</b> existe o campo <b>"scripts": { "test": "echo \"Error: no test specified\" && exit 1" }</b>, nele você pode criar scripts do terminal 
+   para facilitar sua vida, exemplo: eu criei o script <b>dev</b> com o comando <b>"dev": "node --watch server.js"</b>, ai para executar vc coloca no terminal <b>npm run (nome do script)</b>. <br>
+</p>
+
+<h3> -- Principais Funções do Terminal -- </h3>
+
+<p>
+    <b>Ctrl + C</b> - Para parar o servidor <br>
+    <b>Ctrl + L</b> - Limpa o terminal <br>
+    <b>npm init -y</b> - Inicia um projeto Node <br>
+    <b>npm install nome-da-biblioteca</b> - Instala uma biblioteca <br>
+    <b>node nome-do-arquivo.js</b> - Roda o servidor (nome q estamos usando: server.js) <br>
+    <b>node --watch nome-do-arquivo.js</b> - Roda o servidor e reinicia automaticamente quando houver alterações no arquivo <br>
+    <b>npx prisma studio</b> - Abre o studio do Prisma para ver os dados do banco de dados <br>
+
+
+</p>
+
+<h2> >> Iniciando um projeto NODE</h2>
+
+<ul>
+    <li>No VS Code, abra o terminal e digite o comando <b>npm init -y</b> para iniciar um projeto Node. </li>
+    <li>Depois, para instalar uma biblioteca, digite <b>npm install nome-da-biblioteca</b>, no caso usamos o express, então digite <b>npm i express</b> (i de install).<br></li>
+    <li>Crie um file server.js e digite <b>import express from 'express'</b></li>
+    <li>Vá em package.json e digite <b>"type": "module",</b></li>
+    <li>Agora em server.js, digite <b>const app = express();</b> e depois <b>app.listen(3000);</b> pronto agora seu servidor rodará na porta 3000, para começar a rodar o servidor, 
+        digite no terminal <b>node server.js</b> (Ctrl + C para parar o servidor)</li>
+    <li>Agora abra o navegador e digite <b>localhost:3000</b> para acessar</li>
+</ul>
+<img src="/assets/img2.png" alt="pasta server.js">
+<br>
+
+
+<h2> >> Criando nossa primeira rota</h2>
+
+<ul>
+    <li>Em server.js, digite <b>app.get('/usuarios', (req, res) => {</b> e depois digite <b>res. send ("Olá rota acessada com sucesso!");</b> </li>
+    <li>Agora abra o navegador e digite <b>localhost:3000/usuarios</b> para acessar a rota</li>
+</ul>
+<img src="/assets/img3.png" alt="pasta server.js">
+<br>
+
+
+<h2> >> Criando nossa primeira rota</h2>
+<p>
+    É possível criar uma rota POST com o mesmo nome (usuarios) que fizemos a rota GET, mas com resposta diferente, para isso baixamos uma extensão chamada <b>Thunder Client</b> no 
+    VS Code, que permite testar as rotas.
+</p>
+
+<img src="/assets/img4.png" alt="pasta server.js">
+<br>
+<br>
+
+<h2> >> Códigos de Status HTTP</h2>
+
+<p>
+    Os <b>Códigos de Status HTTP</b> são usados para indicar o sucesso ou falha de uma requisição. <br>
+    <br>
+    Exemplos: <br>
+    <br>
+
+    <b>-- Confirmação / Sucesso</b> <br>
+    <b>200</b> - OK <br>
+    <b>201</b> - Created <br>
+    <b>202</b> - Accepted <br>
+    <b>204</b> - No Content <br>
+    <br>
+
+    <b>-- Erro do Cliente (Front-end)</b><br>
+    <b>400</b> - Bad Request <br>
+    <b>401</b> - Unauthorized <br>
+    <b>403</b> - Forbidden <br>
+    <b>404</b> - Not Found <br>
+    <br>
+
+    <b>-- Erro do Servidor (Back-end)</b><br>
+    <b>500</b> - Internal Server Error <br>
+    <b>501</b> - Not Implemented <br>
+    <b>502</b> - Bad Gateway <br>
+</p>
+
+<h2> >> Métodos HTTP</h2>
+
+<p>
+    Os <b>Métodos HTTP</b> são formas de enviar dados para o Back-End, geralmente usados para criar, ler, atualizar e deletar informações. <br>
+    <br>
+    
+    <b>GET</b> - Buscar / Listar dados do Back-End (Servidor) <br>
+    <b>POST</b> - Criar dados / Ex: Criar usuários <br>
+    <b>PUT</b> - Atualizar / Editar vários dados no Back-End / Ex: usuários, produtos, etc <br>
+    <b>PATCH</b> - Atualizar / Editar apenas um dado específico no Back-End <br>
+    <b>DELETE</b> - Deletar dados do Back-End <br>
+</p>
+
+<h2> >> Query Params (GET)</h2>
+
+<p>
+    O <b>Query Params</b> é uma forma de enviar parâmetros na URL, geralmente usado para filtros e buscas. <br>
+    Exemplo: <b>localhost:3000/usuarios?nome=João&idade=25</b> <br>
+    Nesse exemplo acima identificamos o Query Param pelo <b>?</b> e estamos enviando o parâmetro <b>nome</b> com o valor <b>João</b> e o parâmetro <b>idade</b> com o valor <b>25</b> <br>
+    O Front-end vai enviar os parâmetros na URL e o Back-End vai receber os parâmetros. <br>
+<br>
+<br>
+    <img src="/assets/query-params.png" alt="Query Params">
+</p>
+
+<h2> >> Route Params (GET, POST, DELETE) </h2>
+
+<p>
+    Os <b>Route Params</b> são parâmetros que fazem parte da URL em si, geralmente usados para identificar informações específicas. <br>
+    Exemplo: <b>localhost:3000/usuarios/0001</b> <br>
+    Nesse exemplo acima, o valor <b>0001</b> é um parâmetro de rota que identifica um usuário específico. <br>
+    Diferente do Query Params, as informações não ficam na URL, . <br>
+<br>
+<br>
+    <img src="/assets/route-params.png" alt="Route Params">
+</p>
+
+<h2> >> Body Params (POST e PUT)</h2>
+
+<p>
+    Os <b>Body Params</b> são parâmetros que são enviados no <b>body</b> da requisição (por debaixo dos panos), geralmente usados para enviar informações mais complexas e/ou sensíveis, como objetos e arrays. <br>
+    Exemplo: <b>localhost:3000/usuarios</b> <br>
+    <b>Obs:</b> - Para visualizar o Body Params no console, escreva no server.js <b>app.use(express.json());</b>, caso contrário não será possivel viasualizar as informações. <br>
+<br>
+<br>
+    <img src="/assets/body-params.png" alt="Body Params">
+</p>
+
+<h2> --- Exemplo na Prática --- </h2>
+
+<p> 
+   A missão é : Criar um banco de dados e listar todos os usuários, (vamos simular um banco de dados e criar um banco de dados de usuários) <br>
+<br>
+   Para simular esse banco de dados criamos uma variável user com um array vazio ( const users = []; ). <br>
+   Para "criar" algo usamos o método <b>POST</b> e para "listar" usamos o método <b>GET</b>. <br>
+   Criei uma rota post <b>banco-de-dados</b> e coloquei a função <b>users.push (req.body); </b> que coloca dentro do array users o que o front-end enviar na requisição body. <br>
+   E depois <b>res.status(201).json({message: "Usuário criado com sucesso!"})</b> para enviar uma resposta com o código de status 201 e a mensagem. <br>
+   Ficaria dessa forma: <br>
+   <br>
+   <img src="/assets/ex1-banco-de-dados .png" alt="Exemplo na Prática">
+   <br> 
+   <img src="/assets/ex1-resultado .png" alt="Exemplo na Prática">
+   <br>
+   Para listar os usuários eu criei uma rota get <b>banco-de-dados</b> e coloquei a função <b>res.status(200).json(users);</b> que envia uma resposta com o código de status 200 e o array users. <br>
+   Ficaria dessa forma: <br>
+    <br>
+    <img src="/assets/ex2-banco-de-dados .png" alt="Exemplo na Prática">
+    <br> 
+    Agora se eu colocar novas informações de usuários no POST e clicarmos em "SEND" e depois clicarmos em "SEND" no GET, ele vai listar todos os usuários que foram criados. <br>
+    <br>
+    <img src="/assets/ex2-resultado .png" alt="Exemplo na Prática">
+
+</p>
+
+<h2> --- Agora no banco de dados de verdade usando Prisma e MongoDB --- </h2>
+
+<p>
+    Já criamos um banco de dados usando o Prisma e o MongoDB, agora vamos criar as rotas para gravar as informações no nosso banco de dados. <br>
+
+    Agora na rota <b>POST</b> criamos o corpo da requisição com as informações da documenatation do Prisma e com as informações que fizemos de quais dados vamos captar,
+    que esta no <b>schema.prisma</b>, e colocamos o <b>AWAIT</b> e <b>ASYNC</b> para ter o tempo de espera para transitar as informações do front-end para o back-end e do 
+    back-end para o banco de dados, ficando dessa forma: <br>
+    <br>
+    <img src="/assets/dados-prisma1.png" alt="Dados Prisma 1">
+</p>
+
+<h2> >> Editando informações no banco de dados</h2>
+
+<p>
+    Para editar informações no banco de dados vamos usar o método <b>PUT</b>, para isso, usando o a imagem acima da criação de usuários, vamos criar uma rota <b>PUT</b> porém com algumas alterações: <br>
+    <ul>
+        <li>Primeiro vamos substituir o <b>POST</b> e colocar o <b>PUT</b></li>
+        <li>Precisamos identificar na rota params qual usuário vamos editar, e para isso vamos usar o id, ficando dessa forma: <b>/usuarios/:id</b>. </li>
+        <li>Agora trocamos o <b>create</b> por <b>update</b>. </li>
+        <li>Na documentation do prisma tem a informação que para editarmos precisamos adicionar o <b>where: {id: req. params.id}</b> (Estamos falando que precisamos pegar o ID da rota params
+        para identificar quem será editado)</li>
+        <li>E para finalizar podemos colocar um Status 200 que é para informar que deu tudo certo. Ficando dessa forma:</li>
+    </ul>
+
+    <img src="/assets/edicao-prisma.png" alt="Edição Prisma">
+<br>
+Agora para testarmos vamos no <b>Thunder Client</b>, podemos criar uma nova rota ou apenas duplicar a rota <b>POST</b> que criamos anteriormente e alteramos para <b>PUT</b>, colocamos 
+o <b>id</b> do usuário que queremos editar e editamos os dados, e clicamos em <b>SEND</b> se tudo deu certo vai aparecer a mensagem de sucesso, ficando dessa forma: <br>
+<br>
+<img src="/assets/edicao-prisma1.png" alt="Edição Prisma">
+
+</p>
+
+<h2> >> Deletando infos no banco de dados</h2>
+
+<p>
+    Agora para deletar informações no banco de dados vamos usar o <b>DELETE</b>, para fazermos isso vamos fazer algumas alterações na rota <b>PUT</b> que criamos anteriormente.<br>
+    <ul>
+        <li>Primeiro vamos substituir o <b>PUT</b> e colocar o <b>DELETE</b></li>
+        <li>Precisamos identificar na rota params qual usuário vamos deletar, e para isso vamos usar o id, ficando dessa forma: <b>/usuarios/:id</b>. </li>
+        <li>Agora trocamos o <b>update</b> por <b>delete</b>. </li>
+        <li>Na documentation do prisma tem a informação que para deletarmos precisamos adicionar o <b>where: {id: req. params.id}</b> (Estamos falando que precisamos pegar o ID da rota params
+        para identificar quem é deletado)</li>
+        <li>E para finalizar podemos colocar um Status 200 que é para informar que deu tudo certo. Ficando dessa forma:</li>
+    </ul>
+    <br>
+    <img src="assets/delete-prisma.png" alt="Delete Prisma">
+    <br>
+    Agora para testarmos vamos no <b>Thunder Client</b>, podemos criar uma nova rota ou apenas duplicar a rota <b>PUT</b> que criamos anteriormente e alteramos para <b>DELETE</b>, colocamos 
+    o <b>id</b> do usuário que queremos deletar na URL em <b>Query</b> mesmo e damos um <b>SEND</b> se tudo deu certo vai aparecer a mensagem de sucesso, ficando dessa forma: <br>
+    <br>
+    <img src="/assets/dados-prisma1.png" alt="Delete Prisma">
+</p>
